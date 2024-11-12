@@ -30,7 +30,8 @@ jobs:
           cd /home/ubuntu/diemquynh.fun &&
           git pull origin main &&
           rm -rf .env &&
-          echo "VITE_API_URL=https://api.diemquynh.fun" > .env &&
+          # thêm api.diemquynh.fun vào .env
+          echo "VITE_API_URL=https://api.diemquynh.fun" >> .env &&
           docker-compose down &&
           docker-compose up -d --build
         ' 
