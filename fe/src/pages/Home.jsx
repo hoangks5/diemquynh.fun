@@ -31,35 +31,41 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    const accounts = JSON.parse(localStorage.getItem('fbAccounts') || '[]');
     const groups = JSON.parse(localStorage.getItem('fbGroups') || '[]');
     
-    const fetchContents = async () => {
+    const fetchData = async () => {
       try {
         const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-        const response = await fetch(`${API_URL}/api/contents/list`, {
+        
+        // Lấy danh sách tài khoản Facebook
+        const accountsResponse = await fetch(`${API_URL}/api/facebook-accounts/list`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
         });
-        const data = await response.json();
-        if (data.status === 'success') {
-          setDashboardData(prev => ({
-            ...prev,
-            contents: data.contents
-          }));
+        const accountsData = await accountsResponse.json();
+        
+        // Lấy danh sách nội dung
+        const contentsResponse = await fetch(`${API_URL}/api/contents/list`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        const contentsData = await contentsResponse.json();
+
+        if (accountsData.status === 'success' && contentsData.status === 'success') {
+          setDashboardData({
+            accounts: accountsData.accounts,
+            groups: groups,
+            contents: contentsData.contents
+          });
         }
       } catch (error) {
-        console.error('Error fetching contents:', error);
+        console.error('Error fetching dashboard data:', error);
       }
     };
 
-    setDashboardData(prev => ({
-      ...prev,
-      accounts,
-      groups
-    }));
-    fetchContents();
+    fetchData();
   }, []);
 
   const pieData = [

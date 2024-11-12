@@ -289,3 +289,98 @@ async def delete_content(content_id: int, current_user = Depends(get_current_use
         return {"status": "success", "message": "Đã xóa nội dung thành công"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+# Thêm model mới
+class FacebookAccount(BaseModel):
+    name: str
+    userId: str
+    token: str
+    addedAt: str
+    updatedAt: Optional[str] = None
+
+@app.post("/api/facebook-accounts/save", tags=["Content Management"])
+async def save_facebook_account(account: FacebookAccount, current_user = Depends(get_current_user)):
+    try:
+        conn = sqlite3.connect('./database.db')
+        cursor = conn.cursor()
+        
+        # Tạo bảng nếu chưa tồn tại
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS facebook_accounts
+        (id INTEGER PRIMARY KEY AUTOINCREMENT,
+         name TEXT,
+         user_id TEXT,
+         token TEXT,
+         added_at TEXT,
+         updated_at TEXT,
+         owner_email TEXT)
+        ''')
+        
+        cursor.execute(
+            """INSERT INTO facebook_accounts 
+            (name, user_id, token, added_at, updated_at, owner_email) 
+            VALUES (?, ?, ?, ?, ?, ?)""",
+            (account.name, account.userId, account.token, 
+             account.addedAt, account.updatedAt, current_user["email"])
+        )
+        
+        conn.commit()
+        conn.close()
+        
+        return {"status": "success", "message": "Đã lưu tài khoản Facebook thành công"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+@app.get("/api/facebook-accounts/list", tags=["Content Management"])
+async def get_facebook_accounts(current_user = Depends(get_current_user)):
+    try:
+        conn = sqlite3.connect('./database.db')
+        cursor = conn.cursor()
+        
+        cursor.execute(
+            """SELECT id, name, user_id, token, added_at, updated_at 
+            FROM facebook_accounts 
+            WHERE owner_email = ? 
+            ORDER BY added_at DESC""",
+            (current_user["email"],)
+        )
+        
+        accounts = cursor.fetchall()
+        conn.close()
+        
+        return {
+            "status": "success",
+            "accounts": [
+                {
+                    "id": row[0],
+                    "name": row[1],
+                    "userId": row[2],
+                    "token": row[3],
+                    "addedAt": row[4],
+                    "updatedAt": row[5]
+                }
+                for row in accounts
+            ]
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+@app.delete("/api/facebook-accounts/{account_id}", tags=["Content Management"])
+async def delete_facebook_account(account_id: int, current_user = Depends(get_current_user)):
+    try:
+        conn = sqlite3.connect('./database.db')
+        cursor = conn.cursor()
+        
+        # Xóa tài khoản và đảm bảo chỉ xóa tài khoản của người dùng hiện tại
+        cursor.execute(
+            """DELETE FROM facebook_accounts 
+            WHERE id = ? AND owner_email = ?""",
+            (account_id, current_user["email"])
+        )
+        
+        conn.commit()
+        conn.close()
+        
+        return {"status": "success", "message": "Đã xóa tài khoản Facebook thành công"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}

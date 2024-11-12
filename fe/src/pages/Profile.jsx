@@ -12,18 +12,32 @@ const Profile = () => {
   const [editToken, setEditToken] = useState('');
   const { showToast } = useToast();
 
-  // Lấy danh sách tài khoản từ localStorage khi component mount
+  // Load danh sách tài khoản từ API khi component mount
   useEffect(() => {
-    const savedAccounts = localStorage.getItem('fbAccounts');
-    if (savedAccounts) {
-      setAccounts(JSON.parse(savedAccounts));
-    }
-  }, []);
+    const fetchAccounts = async () => {
+      try {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const response = await fetch(`${API_URL}/api/facebook-accounts/list`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Không thể tải danh sách tài khoản');
+        }
 
-  // Lưu danh sách tài khoản vào localStorage khi có thay đổi
-  useEffect(() => {
-    localStorage.setItem('fbAccounts', JSON.stringify(accounts));
-  }, [accounts]);
+        const data = await response.json();
+        if (data.status === 'success') {
+          setAccounts(data.accounts);
+        }
+      } catch (error) {
+        showToast('Lỗi khi tải danh sách tài khoản', 'error');
+      }
+    };
+
+    fetchAccounts();
+  }, []);
 
   // Thêm tài khoản mới
   const handleAddAccount = async () => {
@@ -37,26 +51,59 @@ const Profile = () => {
       }
 
       const newAccount = {
-        id: Date.now(),
         name: data.name,
         userId: data.id,
         token: newToken,
         addedAt: new Date().toISOString()
       };
 
-      setAccounts([...accounts, newAccount]);
+      // Lưu vào database thông qua API
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const saveResponse = await fetch(`${API_URL}/api/facebook-accounts/save`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(newAccount)
+      });
+
+      if (!saveResponse.ok) {
+        throw new Error('Không thể lưu tài khoản');
+      }
+
+      setAccounts([...accounts, { ...newAccount, id: Date.now() }]);
       setNewToken('');
       showToast('Thêm tài khoản thành công', 'success');
     } catch (error) {
-      showToast('Token không hợp lệ hoặc đã hết hạn', 'error');
+      showToast(error.message || 'Token không hợp lệ hoặc đã hết hạn', 'error');
     }
   };
 
   // Xóa tài khoản
-  const handleDeleteAccount = (id) => {
+  const handleDeleteAccount = async (id) => {
     if (window.confirm('Bạn có chắc muốn xóa tài khoản này?')) {
-      setAccounts(accounts.filter(account => account.id !== id));
-      showToast('Đã xóa tài khoản thành công', 'success');
+      try {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const response = await fetch(`${API_URL}/api/facebook-accounts/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Không thể xóa tài khoản');
+        }
+
+        const data = await response.json();
+        if (data.status === 'success') {
+          setAccounts(accounts.filter(account => account.id !== id));
+          showToast('Đã xóa tài khoản thành công', 'success');
+        }
+      } catch (error) {
+        showToast('Lỗi khi xóa tài khoản', 'error');
+      }
     }
   };
 

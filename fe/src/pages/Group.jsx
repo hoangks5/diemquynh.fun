@@ -23,14 +23,30 @@ const Group = () => {
     localStorage.setItem('fbGroups', JSON.stringify(groups));
   }, [groups]);
 
+  const getRandomToken = async () => {
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/facebook-accounts/list`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      
+      const data = await response.json();
+      if (data.status === 'success' && data.accounts.length > 0) {
+        // Lấy ngẫu nhiên một token từ danh sách tài khoản
+        const randomAccount = data.accounts[Math.floor(Math.random() * data.accounts.length)];
+        return randomAccount.token;
+      }
+      throw new Error('Không có tài khoản Facebook nào');
+    } catch (error) {
+      throw new Error('Vui lòng thêm tài khoản Facebook trước');
+    }
+  };
+
   const handleAddGroup = async () => {
     try {
-      // Lấy token của tài khoản đang đăng nhập từ localStorage
-      const accounts = JSON.parse(localStorage.getItem('fbAccounts') || '[]');
-      if (accounts.length === 0) {
-        throw new Error('Vui lòng thêm tài khoản Facebook trước');
-      }
-      const activeToken = accounts[0].token; // Sử dụng token của tài khoản đầu tiên
+      const activeToken = await getRandomToken();
 
       // Kiểm tra group ID hợp lệ bằng cách gọi Facebook API
       const response = await fetch(`https://graph.facebook.com/${newGroupId}?fields=name,member_count&access_token=${activeToken}`);
@@ -65,11 +81,7 @@ const Group = () => {
 
   const handleUpdateGroup = async (id) => {
     try {
-      const accounts = JSON.parse(localStorage.getItem('fbAccounts') || '[]');
-      if (accounts.length === 0) {
-        throw new Error('Vui lòng thêm tài khoản Facebook trước');
-      }
-      const activeToken = accounts[0].token;
+      const activeToken = await getRandomToken();
 
       const response = await fetch(`https://graph.facebook.com/${editGroupId}?fields=name,member_count&access_token=${activeToken}`);
       const data = await response.json();
