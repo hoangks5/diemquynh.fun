@@ -23,6 +23,11 @@ jobs:
       run: |
         ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
     
+    - name: Update .env file
+      run: |
+        cd fe
+        sed -i "s|VITE_API_URL=.*|VITE_API_URL=http://${{ secrets.EC2_HOST }}|g" .env
+    
     - name: Deploy to EC2
       run: |
         ssh -i ~/.ssh/ec2-key.pem ubuntu@${{ secrets.EC2_HOST }} '
