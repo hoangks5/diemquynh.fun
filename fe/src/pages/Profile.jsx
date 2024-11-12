@@ -100,8 +100,6 @@ const Profile = () => {
       <main className="home-main" style={{ flex: 1 }}>
         <div className="home-content">
           <div className="profile-container">
-            <h1>Quản lý tài khoản Facebook</h1>
-            
             {/* Form thêm tài khoản mới */}
             <div className="add-account-form">
               <input

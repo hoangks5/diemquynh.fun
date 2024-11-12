@@ -107,8 +107,6 @@ const Group = () => {
       <main className="home-main" style={{ flex: 1 }}>
         <div className="home-content">
           <div className="group-container">
-            <h1>Quản lý nhóm Facebook</h1>
-            
             <div className="add-group-form">
               <input
                 type="text"
