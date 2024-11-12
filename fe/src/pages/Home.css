@@ -1,232 +1,231 @@
 .home-container {
-    min-height: 100vh;
-    background-color: #f5f5f5;
-  }
-  
-  .home-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .logout-button {
-    padding: 0.5rem 1rem;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .logout-button:hover {
-    background-color: #c82333;
-  }
-  
-  .home-content {
-    padding: 2rem;
-    max-width: auto;
-    margin: 0 auto;
-  }
-  
-  .welcome-section {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .loading {
-    text-align: center;
-    padding: 2rem;
-  }
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
 
-  .home-layout {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-  }
-  
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
+.home-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+.home-content {
+  padding: 2rem;
+  max-width: auto;
+  margin: 0 auto;
+}
+
+.welcome-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+}
+
+.home-layout {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.home-main {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding-top: 4rem;
+}
+
+.home-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding: 2rem;
+}
+
+.welcome-section {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 3rem;
+  color: white;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(156, 39, 176, 0.2);
+}
+
+.welcome-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.welcome-section::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.welcome-section:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(100%, -100%);
+}
+
+.loading {
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.logout-button {
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(45deg, #9C27B0, #ff4081);
+  background-size: 200% 200%;
+  animation: buttonGradient 3s ease infinite;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes buttonGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.logout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+}
+
+.logout-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.logout-button:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(100%, -100%);
+}
+
+@media (min-width: 680px) {
   .home-main {
-    flex: 1;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    padding-top: 4rem;
+    margin-left: 240px;
+    padding-bottom: 0;
   }
   
   .home-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    padding: 2rem;
+    padding: 2rem 3rem;
   }
-  
+}
+
+@media (max-width: 680px) {
   .welcome-section {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 24px;
-    padding: 3rem;
-    color: white;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .welcome-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(156, 39, 176, 0.2);
+    padding: 2rem;
   }
   
   .welcome-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
-    background-size: 300% 300%;
-    animation: textGradient 6s ease infinite;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+    font-size: 2rem;
   }
-  
-  @keyframes textGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  .welcome-section::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    transform: rotate(45deg);
-    transition: all 0.5s;
-    opacity: 0;
-  }
-  
-  .welcome-section:hover::after {
-    opacity: 1;
-    transform: rotate(45deg) translate(100%, -100%);
-  }
-  
-  .loading {
-    text-align: center;
-    color: white;
-    padding: 2rem;
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-  }
-  
-  .logout-button {
-    padding: 0.8rem 1.5rem;
-    background: linear-gradient(45deg, #9C27B0, #ff4081);
-    background-size: 200% 200%;
-    animation: buttonGradient 3s ease infinite;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  @keyframes buttonGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  .logout-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
-  }
-  
-  .logout-button::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.3) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    transform: rotate(45deg);
-    transition: all 0.5s;
-    opacity: 0;
-  }
-  
-  .logout-button:hover::after {
-    opacity: 1;
-    transform: rotate(45deg) translate(100%, -100%);
-  }
-  
-  @media (min-width: 680px) {
-    .home-main {
-      margin-left: 240px;
-      padding-bottom: 0;
-    }
-    
-    .home-content {
-      padding: 2rem 3rem;
-    }
-  }
+}
 
-  @media (max-width: 680px) {
-    .welcome-section {
-      padding: 2rem;
-    }
-    
-    .welcome-section h2 {
-      font-size: 2rem;
-    }
-  }
-
-  
