@@ -9,7 +9,15 @@ from typing import Optional
 import sqlite3
 import random
 import requests
-app = FastAPI()
+app = FastAPI(
+    docs_url='/',
+    openapi_tags=[
+        {"name": "Authentication", "description": ""},
+        {"name": "User", "description": ""},
+        {"name": "AI Generation", "description": ""},
+        {"name": "Content Management", "description": ""},
+    ]
+)
 
 # Cấu hình CORS để Frontend có thể gọi API
 app.add_middleware(
@@ -81,7 +89,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-@app.post("/api/login", response_model=Token)
+@app.post("/api/login", response_model=Token, tags=["Authentication"])
 async def login(form_data: UserLogin):
     user = authenticate_user(form_data.email, form_data.password)
     if not user:
@@ -117,7 +125,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     return user
 
 # Thêm endpoint mới để lấy thông tin user
-@app.get("/api/user/me")
+@app.get("/api/user/me", tags=["User"])
 async def read_users_me(current_user = Depends(get_current_user)):
     return {
         "email": current_user["email"]
@@ -178,7 +186,7 @@ def call_gemini_api(api_key, system_prompt, user_prompt, model, temperature, top
     except Exception as e:
         return f"Error: {str(e)}"
     
-@app.post("/gemini-api")
+@app.post("/gemini-api", tags=["AI Generation"])
 def gemini_api_endpoint(request: GeminiRequest):
     api_key = get_api_key_gemini()
     if not api_key:
@@ -207,7 +215,7 @@ class SavedContent(BaseModel):
     user_email: str
 
 # Thêm các endpoint mới
-@app.post("/api/contents/save")
+@app.post("/api/contents/save", tags=["Content Management"])
 async def save_content(content: SavedContent, current_user = Depends(get_current_user)):
     try:
         conn = sqlite3.connect('./database.db')
@@ -235,7 +243,7 @@ async def save_content(content: SavedContent, current_user = Depends(get_current
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
-@app.get("/api/contents/list")
+@app.get("/api/contents/list", tags=["Content Management"])
 async def get_saved_contents(current_user = Depends(get_current_user)):
     try:
         conn = sqlite3.connect('./database.db')
@@ -264,7 +272,7 @@ async def get_saved_contents(current_user = Depends(get_current_user)):
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
-@app.delete("/api/contents/{content_id}")
+@app.delete("/api/contents/{content_id}", tags=["Content Management"])
 async def delete_content(content_id: int, current_user = Depends(get_current_user)):
     try:
         conn = sqlite3.connect('./database.db')
