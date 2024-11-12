@@ -14,6 +14,7 @@ import {
   FaSignOutAlt
 } from 'react-icons/fa';
 import './Menu.css';
+import logo from '../assets/logo.gif';
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +56,26 @@ const Menu = () => {
       <div className={`menu-sidebar ${isOpen ? 'open' : ''}`}>
         <div className="menu-header">
           <div className="menu-logo">
-            <h2>Logo</h2>
+            <img 
+              src={logo} 
+              alt="Logo" 
+              style={{ 
+                height: '120px',
+                width: '120px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '3px solid #3498db',
+                boxShadow: '0 4px 15px rgba(52, 152, 219, 0.3), 0 0 30px rgba(52, 152, 219, 0.2)',
+                padding: '3px',
+                background: 'white',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                '&:hover': {
+                  transform: 'scale(1.05)',
+                  boxShadow: '0 6px 20px rgba(52, 152, 219, 0.4), 0 0 40px rgba(52, 152, 219, 0.3)',
+                }
+              }} 
+            />
           </div>
         </div>
 
