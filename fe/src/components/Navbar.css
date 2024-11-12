@@ -1,12 +1,14 @@
 .navbar {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 0.8rem 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-container {
@@ -22,12 +24,13 @@
 }
 
 .nav-link {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 1rem;
   padding: 0.5rem;
   transition: all 0.3s ease;
   position: relative;
+  font-weight: 500;
 }
 
 .nav-link:after {
@@ -35,24 +38,65 @@
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: 0;
+  bottom: -2px;
   left: 50%;
-  background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+  background: linear-gradient(45deg, #9C27B0, #ff4081);
   transition: all 0.3s ease;
   transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
 }
 
 .nav-link:hover {
-  color: #ff6b6b;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
 }
 
 .nav-link:hover:after {
   width: 100%;
 }
 
+.nav-link.active {
+  color: #fff;
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(156, 39, 176, 0.1);
+  border-radius: 4px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: scale(0.8);
+}
+
+.nav-link:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
 @media (min-width: 768px) {
   .navbar-container {
     padding-left: calc(240px + 2rem);
+  }
+  
+  .nav-link {
+    font-size: 1rem;
   }
 }
 
@@ -73,5 +117,10 @@
   
   .nav-link {
     font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+  
+  .navbar {
+    padding: 0.8rem 0;
   }
 }

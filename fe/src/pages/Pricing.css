@@ -1,12 +1,21 @@
 .pricing-layout {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1e1e2f, #2d2b42);
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  overflow-y: auto;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .pricing-main {
@@ -22,9 +31,22 @@
 }
 
 .pricing-main h1 {
-  color: #333;
+  color: white;
   margin-bottom: 2rem;
   font-size: 2.5rem;
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .pricing-toggle {
@@ -56,9 +78,15 @@
 .toggle-btn.active {
   color: white;
   font-weight: bold;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(45deg, rgba(156, 39, 176, 0.2), rgba(255, 64, 129, 0.2));
+  animation: toggleGlow 2s ease-in-out infinite alternate;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
+}
+
+@keyframes toggleGlow {
+  from { box-shadow: 0 0 10px rgba(156, 39, 176, 0.3); }
+  to { box-shadow: 0 0 20px rgba(156, 39, 176, 0.6); }
 }
 
 .toggle-btn.active::before {
@@ -106,8 +134,9 @@
   flex: 1;
   min-width: 280px;
   max-width: 320px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(156, 39, 176, 0.05));
+  background-size: 200% 200%;
+  animation: cardGradient 10s ease infinite;
   border-radius: 20px;
   padding: 1.5rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -116,6 +145,12 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
   overflow: hidden;
+}
+
+@keyframes cardGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .pricing-card::before {
@@ -139,6 +174,13 @@
   color: var(--card-color);
   margin-bottom: 1rem;
   filter: drop-shadow(0 0 8px var(--card-color));
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .popular {
@@ -150,13 +192,19 @@
   position: absolute;
   top: 1.5rem;
   right: -3rem;
-  background: var(--card-color);
+  background: linear-gradient(45deg, #9C27B0, #ff4081);
+  animation: badgeGlow 2s ease-in-out infinite alternate;
   color: white;
   padding: 0.5rem 3.5rem;
   transform: rotate(45deg);
   font-size: 0.85rem;
   font-weight: bold;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes badgeGlow {
+  from { box-shadow: 0 0 10px rgba(156, 39, 176, 0.5); }
+  to { box-shadow: 0 0 20px rgba(156, 39, 176, 0.8); }
 }
 
 .price {
@@ -170,10 +218,18 @@
 .amount {
   font-size: 2.8rem;
   font-weight: bold;
-  background: linear-gradient(to right, #fff, var(--card-color));
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .currency {
@@ -217,7 +273,9 @@
 }
 
 .subscribe-btn {
-  background: linear-gradient(45deg, var(--card-color), rgba(255,255,255,0.2));
+  background: linear-gradient(45deg, #9C27B0, #ff4081);
+  background-size: 200% 200%;
+  animation: buttonGradient 3s ease infinite;
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -233,6 +291,12 @@
   overflow: hidden;
 }
 
+@keyframes buttonGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .subscribe-btn:hover {
   filter: brightness(120%);
   transform: translateY(-2px);
@@ -241,6 +305,29 @@
 
 .subscribe-btn:active {
   transform: translateY(0);
+}
+
+.subscribe-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.subscribe-btn:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(100%, -100%);
 }
 
 @media (max-width: 768px) {

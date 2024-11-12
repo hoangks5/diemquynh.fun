@@ -1,6 +1,8 @@
 .about-layout {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1e1e2f, #2d2b42);
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
   width: 100%;
   position: fixed;
   top: 0;
@@ -8,6 +10,13 @@
   right: 0;
   bottom: 0;
   overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .about-main {
@@ -27,10 +36,19 @@
 .hero-section h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #fff, #9C27B0);
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .subtitle {
@@ -49,6 +67,13 @@
   text-align: center;
   margin-bottom: 3rem;
   font-size: 2rem;
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
 }
 
 .values-grid {
@@ -60,23 +85,64 @@
 }
 
 .value-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(156, 39, 176, 0.05));
+  background-size: 200% 200%;
+  animation: cardGradient 10s ease infinite;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(156, 39, 176, 0.1);
+  transition: all 0.3s ease;
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
-  transition: transform 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes cardGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.value-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.value-card:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(100%, -100%);
 }
 
 .value-card:hover {
   transform: translateY(-10px);
+  box-shadow: 0 0 25px rgba(156, 39, 176, 0.3);
 }
 
 .value-icon {
   font-size: 2.5rem;
   color: #9C27B0;
   margin-bottom: 1rem;
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .value-card h3 {
@@ -97,6 +163,13 @@
   text-align: center;
   margin-bottom: 3rem;
   font-size: 2rem;
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
 }
 
 .team-grid {
@@ -108,8 +181,11 @@
 }
 
 .team-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(156, 39, 176, 0.05));
+  background-size: 200% 200%;
+  animation: cardGradient 10s ease infinite;
+  position: relative;
+  overflow: hidden;
   border-radius: 20px;
   padding: 1.5rem;
   text-align: center;
@@ -117,8 +193,15 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+@keyframes cardGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .team-card:hover {
   transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(156, 39, 176, 0.2);
 }
 
 .member-image {
@@ -127,7 +210,14 @@
   margin: 0 auto 1rem;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #9C27B0;
+  border: 3px solid transparent;
+  background: linear-gradient(45deg, #9C27B0, #ff4081) border-box;
+  animation: borderGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow {
+  from { box-shadow: 0 0 10px rgba(156, 39, 176, 0.5); }
+  to { box-shadow: 0 0 20px rgba(156, 39, 176, 0.8); }
 }
 
 .member-image img {
@@ -148,8 +238,15 @@
 .mission-section {
   padding: 4rem 2rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(156, 39, 176, 0.05));
+  background-size: 200% 200%;
+  animation: sectionGradient 10s ease infinite;
+}
+
+@keyframes sectionGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .mission-content {
@@ -160,6 +257,13 @@
 .mission-content h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
 }
 
 .mission-content p {

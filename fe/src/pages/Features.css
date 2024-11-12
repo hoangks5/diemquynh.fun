@@ -1,6 +1,8 @@
 .features-layout {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1e1e2f, #2d2b42);
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
   width: 100%;
   position: fixed;
   top: 0;
@@ -8,6 +10,13 @@
   right: 0;
   bottom: 0;
   overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .features-main {
@@ -21,15 +30,35 @@
   padding: 4rem 2rem;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
+  transition: backdrop-filter 0.3s ease;
+}
+
+.features-hero:hover {
+  backdrop-filter: blur(15px);
 }
 
 .features-hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #fff, #9C27B0);
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+  animation: glowText 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowText {
+  from { text-shadow: 0 0 10px rgba(156, 39, 176, 0.5); }
+  to { text-shadow: 0 0 20px rgba(156, 39, 176, 0.8); }
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .hero-subtitle {
@@ -53,8 +82,9 @@
 }
 
 .feature-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(156, 39, 176, 0.05));
+  background-size: 200% 200%;
+  animation: cardGradient 10s ease infinite;
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
@@ -62,6 +92,19 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 15px rgba(156, 39, 176, 0.1);
+  transition: all 0.3s ease;
+}
+
+@keyframes cardGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px rgba(156, 39, 176, 0.3);
 }
 
 .feature-card::before {
@@ -71,23 +114,57 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, transparent, #9C27B0, transparent);
+  background: linear-gradient(90deg, transparent, #9C27B0, #ff4081, transparent);
+  background-size: 200% 200%;
+  animation: borderGradient 3s ease infinite;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.feature-card:hover {
-  transform: translateY(-10px);
+@keyframes borderGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .feature-card:hover::before {
   opacity: 1;
 }
 
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.feature-card:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(100%, -100%);
+}
+
 .feature-icon {
   font-size: 2.5rem;
   color: #9C27B0;
   margin-bottom: 1.5rem;
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .feature-card h3 {
@@ -115,10 +192,14 @@
 .showcase-content h2 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  background: linear-gradient(45deg, #fff, #9C27B0);
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+  animation: glowText 2s ease-in-out infinite alternate;
 }
 
 .tech-stack {
@@ -131,16 +212,31 @@
 
 .tech-item {
   padding: 0.8rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(156, 39, 176, 0.1));
+  background-size: 200% 200%;
+  animation: techGradient 8s ease infinite;
   border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes techGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .tech-item:hover {
-  transform: translateY(-5px);
-  background: rgba(156, 39, 176, 0.2);
+  transform: translateY(-5px) scale(1.05);
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(255, 64, 129, 0.2));
+  box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
 }
 
 /* Advanced Features Section */
@@ -152,10 +248,14 @@
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 3rem;
-  background: linear-gradient(45deg, #fff, #9C27B0);
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+  animation: glowText 2s ease-in-out infinite alternate;
 }
 
 .advanced-features-grid {
@@ -167,18 +267,21 @@
 }
 
 .advanced-feature-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(156, 39, 176, 0.05));
+  background-size: 200% 200%;
+  animation: cardGradient 10s ease infinite;
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-origin: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .advanced-feature-card:hover {
-  transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Design */

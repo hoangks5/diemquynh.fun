@@ -3,7 +3,7 @@
   top: 1rem;
   left: 1rem;
   z-index: 1100;
-  background: transparent;
+  background: linear-gradient(45deg, rgba(156, 39, 176, 0.2), rgba(255, 64, 129, 0.2));
   border: none;
   color: #fff;
   font-size: 1.5rem;
@@ -13,15 +13,17 @@
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   width: 45px;
   height: 45px;
   transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(156, 39, 176, 0.2);
 }
 
 .menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(45deg, rgba(156, 39, 176, 0.3), rgba(255, 64, 129, 0.3));
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(156, 39, 176, 0.4);
 }
 
 .menu-overlay {
@@ -30,8 +32,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
+  background: rgba(26, 26, 46, 0.7);
+  backdrop-filter: blur(5px);
   z-index: 1050;
   opacity: 0;
   visibility: hidden;
@@ -49,13 +51,14 @@
   left: -280px;
   width: 280px;
   height: 100vh;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.9));
   backdrop-filter: blur(20px);
   z-index: 1060;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 30px rgba(156, 39, 176, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .menu-sidebar.open {
@@ -69,10 +72,19 @@
 }
 
 .menu-logo h2 {
-  color: #fff;
-  margin: 0;
-  font-size: 1.8rem;
-  letter-spacing: 1px;
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .menu-items {
@@ -89,7 +101,7 @@
   width: 100%;
   border: none;
   background: transparent;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -97,18 +109,20 @@
 }
 
 .menu-item:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: linear-gradient(45deg, rgba(156, 39, 176, 0.1), rgba(255, 64, 129, 0.1));
   transform: translateX(10px);
-  color: #ff6b6b;
+  color: #fff;
 }
 
 .menu-item:hover svg {
   transform: scale(1.2);
+  color: #ff4081;
 }
 
 .menu-item svg {
   font-size: 1.3rem;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .menu-item span {
@@ -123,15 +137,41 @@
 }
 
 .menu-item.logout {
-  color: #ff6b6b;
+  background: linear-gradient(45deg, rgba(156, 39, 176, 0.1), rgba(255, 64, 129, 0.1));
   margin: 0 auto;
   width: 90%;
   border-radius: 8px;
+  position: relative;
+  overflow: hidden;
 }
 
 .menu-item.logout:hover {
-  background: rgba(255, 107, 107, 0.15);
-  transform: translateX(0) scale(1.05);
+  background: linear-gradient(45deg, rgba(156, 39, 176, 0.2), rgba(255, 64, 129, 0.2));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(156, 39, 176, 0.2);
+}
+
+.menu-item.logout::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.menu-item.logout:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(100%, -100%);
 }
 
 @media (min-width: 768px) {

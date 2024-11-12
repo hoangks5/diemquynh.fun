@@ -1,13 +1,8 @@
 import Navbar from '../components/Navbar';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaTelegram, FaFacebookF, FaGithub } from 'react-icons/fa';
 import './Contact.css';
 
 const Contact = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Xử lý logic gửi form ở đây
-  };
-
   return (
     <div className="contact-layout">
       <Navbar />
@@ -15,47 +10,66 @@ const Contact = () => {
       <main className="contact-main">
         <div className="contact-container">
           <div className="contact-info">
-            <h2>Liên Hệ Với Chúng Tôi</h2>
+            <h2>Kết Nối Với Chúng Tôi</h2>
             <div className="info-items">
               <div className="info-item">
-                <FaEnvelope />
+                <FaEnvelope className="icon-pulse"/>
                 <div>
                   <h3>Email</h3>
-                  <p>support@example.com</p>
+                  <p>hoangnd.ute@gmail.com</p>
                 </div>
               </div>
+              
               <div className="info-item">
-                <FaPhone />
+                <FaTelegram className="icon-pulse"/>
+                <div>
+                  <h3>Telegram</h3>
+                  <a href="https://t.me/hoangks_5" target="_blank" rel="noopener noreferrer" className="social-link">
+                    <span className="link-text">@hoangks_5</span>
+                    <span className="link-arrow">→</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="info-item">
+                <FaFacebookF className="icon-pulse"/>
+                <div>
+                  <h3>Facebook</h3>
+                  <a href="https://facebook.com/hoangkss5" target="_blank" rel="noopener noreferrer" className="social-link">
+                    <span className="link-text">facebook.com/hoangkss5</span>
+                    <span className="link-arrow">→</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="info-item">
+                <FaGithub className="icon-pulse"/>
+                <div>
+                  <h3>Github</h3>
+                  <a href="https://github.com/hoangks5" target="_blank" rel="noopener noreferrer" className="social-link">
+                    <span className="link-text">github.com/hoangks5</span>
+                    <span className="link-arrow">→</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="info-item">
+                <FaPhone className="icon-pulse"/>
                 <div>
                   <h3>Điện Thoại</h3>
-                  <p>+84 123 456 789</p>
+                  <p>+84 358 259 167</p>
                 </div>
               </div>
+
               <div className="info-item">
-                <FaMapMarkerAlt />
+                <FaMapMarkerAlt className="icon-pulse"/>
                 <div>
                   <h3>Địa Chỉ</h3>
-                  <p>123 Đường ABC, Quận XYZ, TP.HCM</p>
+                  <p>Cầu Giấy, Hà Nội, Việt Nam</p>
                 </div>
               </div>
             </div>
           </div>
-
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input type="text" placeholder="Họ và tên" required />
-            </div>
-            <div className="form-group">
-              <input type="email" placeholder="Email" required />
-            </div>
-            <div className="form-group">
-              <input type="tel" placeholder="Số điện thoại" />
-            </div>
-            <div className="form-group">
-              <textarea placeholder="Nội dung tin nhắn" rows="5" required></textarea>
-            </div>
-            <button type="submit" className="submit-btn">Gửi Tin Nhắn</button>
-          </form>
         </div>
       </main>
     </div>
