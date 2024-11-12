@@ -6,7 +6,9 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from pydantic import BaseModel
 from typing import Optional
-
+import sqlite3
+import random
+import requests
 app = FastAPI()
 
 # Cấu hình CORS để Frontend có thể gọi API
@@ -120,3 +122,162 @@ async def read_users_me(current_user = Depends(get_current_user)):
     return {
         "email": current_user["email"]
     }
+    
+    
+def get_api_key_gemini():
+    # lấy api key từ database
+    conn = sqlite3.connect('./database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT api_key FROM api_keys WHERE expired = 0")
+    api_key = cursor.fetchone()
+    conn.close()
+    return random.choice(api_key)
+
+class GeminiRequest(BaseModel):
+    user_prompt: str
+    system_prompt: str = "Bạn là một chuyên gia trong việc tạo nội dung đăng tuyển việc làm"
+    model: str = "gemini-pro"
+    temperature: float = 0.8
+    topK: int = 50
+    topP: float = 0.97
+    maxOutputTokens: int = 4096
+    
+def call_gemini_api(api_key, system_prompt, user_prompt, model, temperature, topK , topP, maxOutputTokens):
+    try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        headers = {
+            "Content-Type": "application/json"
+        }
+
+        data = {
+            "contents": [{
+                "parts": [{
+                    "text": system_prompt + "\n" + user_prompt
+                }]
+            }],
+            "generationConfig": {
+                "temperature": temperature,
+                "topK": topK,
+                "topP": topP,
+                "maxOutputTokens": maxOutputTokens,
+            }
+        }
+        
+        response = requests.post(
+            f"{url}?key={api_key}",
+            headers=headers,
+            json=data
+        )
+        
+        if response.status_code == 200:
+            result = response.json()
+            return result['candidates'][0]['content']['parts'][0]['text']
+        else:
+            return f"Error: HTTP {response.status_code} - {response.text}"
+            
+    except Exception as e:
+        return f"Error: {str(e)}"
+    
+@app.post("/gemini-api")
+def gemini_api_endpoint(request: GeminiRequest):
+    api_key = get_api_key_gemini()
+    if not api_key:
+        raise HTTPException(status_code=400, detail="No API keys available")
+    
+    response = call_gemini_api(
+            api_key,
+            system_prompt=request.system_prompt,
+            user_prompt=request.user_prompt,
+            model=request.model,
+            temperature=request.temperature,
+            topK=request.topK,
+            topP=request.topP,
+            maxOutputTokens=request.maxOutputTokens
+        )
+    # Kiểm tra nếu response bắt đầu bằng "Error:"
+    if isinstance(response, str) and response.startswith("Error:"):
+        return {"status": "error", "message": response}
+    result = {"status": "success", "response": response}
+    return result
+
+# Thêm model mới
+class SavedContent(BaseModel):
+    title: str
+    content: str
+    user_email: str
+
+# Thêm các endpoint mới
+@app.post("/api/contents/save")
+async def save_content(content: SavedContent, current_user = Depends(get_current_user)):
+    try:
+        conn = sqlite3.connect('./database.db')
+        cursor = conn.cursor()
+        
+        # Tạo bảng nếu chưa tồn tại
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS saved_contents
+        (id INTEGER PRIMARY KEY AUTOINCREMENT,
+         title TEXT,
+         content TEXT,
+         user_email TEXT,
+         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+        ''')
+        
+        cursor.execute(
+            "INSERT INTO saved_contents (title, content, user_email) VALUES (?, ?, ?)",
+            (content.title, content.content, current_user["email"])
+        )
+        
+        conn.commit()
+        conn.close()
+        
+        return {"status": "success", "message": "Đã lưu nội dung thành công"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+@app.get("/api/contents/list")
+async def get_saved_contents(current_user = Depends(get_current_user)):
+    try:
+        conn = sqlite3.connect('./database.db')
+        cursor = conn.cursor()
+        
+        cursor.execute(
+            "SELECT id, title, content, created_at FROM saved_contents WHERE user_email = ? ORDER BY created_at DESC",
+            (current_user["email"],)
+        )
+        
+        contents = cursor.fetchall()
+        conn.close()
+        
+        return {
+            "status": "success",
+            "contents": [
+                {
+                    "id": row[0],
+                    "title": row[1],
+                    "content": row[2],
+                    "created_at": row[3]
+                }
+                for row in contents
+            ]
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+@app.delete("/api/contents/{content_id}")
+async def delete_content(content_id: int, current_user = Depends(get_current_user)):
+    try:
+        conn = sqlite3.connect('./database.db')
+        cursor = conn.cursor()
+        
+        cursor.execute(
+            "DELETE FROM saved_contents WHERE id = ? AND user_email = ?",
+            (content_id, current_user["email"])
+        )
+        
+        conn.commit()
+        conn.close()
+        
+        return {"status": "success", "message": "Đã xóa nội dung thành công"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}

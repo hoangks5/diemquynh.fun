@@ -10,6 +10,7 @@ import About from './pages/About';
 import Features from './pages/Features';
 import Profile from './pages/Profile';
 import Group from './pages/Group';
+import AiContent from './pages/AiContent';
 import { ToastProvider } from './contexts/ToastContext';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/features" element={<Features />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/groups" element={<Group />} />
+            <Route path="/ai-content" element={<AiContent />} />
           </Routes>
         </Router>
       </AuthProvider>
