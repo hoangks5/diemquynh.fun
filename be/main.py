@@ -187,7 +187,7 @@ def call_gemini_api(api_key, system_prompt, user_prompt, model, temperature, top
         return f"Error: {str(e)}"
     
 @app.post("/gemini-api", tags=["AI Generation"])
-def gemini_api_endpoint(request: GeminiRequest):
+def gemini_api_endpoint(request: GeminiRequest, current_user = Depends(get_current_user)):
     api_key = get_api_key_gemini()
     if not api_key:
         raise HTTPException(status_code=400, detail="No API keys available")
