@@ -113,10 +113,11 @@ const Features = () => {
               Sử dụng công nghệ tiên tiến nhất để xây dựng giải pháp tối ưu cho doanh nghiệp của bạn
             </p>
             <div className="tech-stack">
-              <div className="tech-item">React</div>
-              <div className="tech-item">Node.js</div>
-              <div className="tech-item">MongoDB</div>
-              <div className="tech-item">Docker</div>
+              <div className="tech-item">Mutil Account</div>
+              <div className="tech-item">Auto Post</div>
+              <div className="tech-item">Auto Comment</div>
+              <div className="tech-item">Auto Seeding</div>
+              <div className="tech-item">AI Generate Content</div>
             </div>
           </div>
         </section>
