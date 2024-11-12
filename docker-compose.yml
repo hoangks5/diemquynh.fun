@@ -25,3 +25,16 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/www:/var/www/html
+    depends_on:
+      - frontend
+      - backend
