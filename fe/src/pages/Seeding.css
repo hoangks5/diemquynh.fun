@@ -1,0 +1,248 @@
+.seeding-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: transparent;
+  padding: 1rem;
+}
+
+.seeding-container h1 {
+  color: white;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 1rem 0 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.seeding-config-section {
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: clamp(16px, 3vw, 24px);
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: grid;
+  gap: clamp(12px, 2vw, 20px);
+  margin: 0 auto;
+}
+
+.config-group {
+  background: rgba(255, 255, 255, 0.05);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.config-group h3 {
+  color: white;
+  margin-bottom: clamp(10px, 2vw, 15px);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.post-input, select, input[type="number"] {
+  width: 100%;
+  padding: clamp(8px, 1.5vw, 10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: clamp(13px, 1.5vw, 14px);
+  color: white;
+}
+
+.actions-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(10px, 2vw, 20px);
+}
+
+.action-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: clamp(14px, 1.5vw, 16px);
+}
+
+.action-checkbox input[type="checkbox"] {
+  width: clamp(16px, 2vw, 18px);
+  height: clamp(16px, 2vw, 18px);
+}
+
+.accounts-preview {
+  max-height: clamp(150px, 30vh, 200px);
+  overflow-y: auto;
+  padding-right: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.account-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(8px, 1.5vw, 10px);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.account-name {
+  font-weight: 500;
+  font-size: clamp(13px, 1.5vw, 14px);
+}
+
+.seeding-badge {
+  background: linear-gradient(45deg, #9C27B0, #ff4081);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: clamp(11px, 1.2vw, 12px);
+  animation: pulse 1.5s infinite;
+  white-space: nowrap;
+}
+
+.seeding-controls {
+  display: flex;
+  justify-content: center;
+  padding: clamp(10px, 2vw, 20px) 0;
+}
+
+.start-button, .stop-button {
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+  border: none;
+  border-radius: 12px;
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .seeding-container {
+    padding: 0.5rem;
+  }
+
+  .seeding-config-section {
+    padding: 1rem;
+    gap: 12px;
+  }
+
+  .config-group {
+    padding: 0.8rem;
+  }
+
+  .actions-group {
+    flex-direction: column;
+  }
+
+  .account-preview {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .start-button, .stop-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .seeding-container {
+    padding: 1rem;
+  }
+
+  .account-preview {
+    padding: 12px;
+  }
+}
+
+@media (min-width: 769px) {
+  .seeding-container {
+    padding: 2rem;
+  }
+
+  .seeding-config-section {
+    padding: 2rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .post-input, select, input[type="number"] {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .account-preview {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .seeding-container h1,
+  .seeding-badge,
+  .start-button,
+  .stop-button {
+    animation: none;
+  }
+}
+
+/* High contrast */
+@media (forced-colors: active) {
+  .seeding-container h1 {
+    -webkit-text-fill-color: CanvasText;
+  }
+
+  .account-preview.active {
+    border: 2px solid CanvasText;
+  }
+}
+
+/* Custom scrollbar - chỉ hiển thị trên thiết bị có hover */
+@media (hover: hover) {
+  .accounts-preview::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .accounts-preview::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  .accounts-preview::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

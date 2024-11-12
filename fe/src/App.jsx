@@ -11,6 +11,9 @@ import Features from './pages/Features';
 import Profile from './pages/Profile';
 import Group from './pages/Group';
 import AiContent from './pages/AiContent';
+import AutoPost from './pages/AutoPost';
+import AutoComment from './pages/AutoComment';
+import Seeding from './pages/Seeding';
 import { ToastProvider } from './contexts/ToastContext';
 
 function App() {
@@ -34,6 +37,9 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/groups" element={<Group />} />
             <Route path="/ai-content" element={<AiContent />} />
+            <Route path="/auto-post" element={<AutoPost />} />
+            <Route path="/auto-comment" element={<AutoComment />} />
+            <Route path="/seeding" element={<Seeding />} />
           </Routes>
         </Router>
       </AuthProvider>
