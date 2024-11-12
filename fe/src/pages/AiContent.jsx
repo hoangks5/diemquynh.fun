@@ -21,7 +21,8 @@ const AiContent = () => {
 
   const fetchSavedContents = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/contents/list', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/contents/list`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -39,7 +40,8 @@ const AiContent = () => {
     if (!outputText || !saveTitle.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:8000/api/contents/save', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/contents/save`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +69,8 @@ const AiContent = () => {
     if (!window.confirm('Bạn có chắc muốn xóa nội dung này?')) return;
 
     try {
-      const response = await fetch(`http://localhost:8000/api/contents/${contentId}`, {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/contents/${contentId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -88,7 +91,8 @@ const AiContent = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/gemini-api', {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const response = await fetch(`${API_URL}/gemini-api`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
