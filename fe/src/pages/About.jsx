@@ -5,25 +5,15 @@ import './About.css';
 const About = () => {
   const teamMembers = [
     {
-      name: 'Nguyễn Văn A',
-      role: 'Giám đốc điều hành',
-      image: 'https://randomuser.me/api/portraits/men/32.jpg',
+      name: 'Nguyễn Đức Hoàng',
+      role: 'Developer',
+      image: 'https://github.com/hoangks5/me/blob/main/avatar.png?raw=true',
     },
     {
-      name: 'Trần Thị B',
-      role: 'Giám đốc sản phẩm',
-      image: 'https://randomuser.me/api/portraits/women/44.jpg',
-    },
-    {
-      name: 'Lê Văn C',
-      role: 'Trưởng phòng kỹ thuật',
-      image: 'https://randomuser.me/api/portraits/men/55.jpg',
-    },
-    {
-      name: 'Phạm Thị D',
-      role: 'Trưởng phòng marketing',
-      image: 'https://randomuser.me/api/portraits/women/67.jpg',
-    },
+      name: 'Vũ Thị Diễm Quỳnh',
+      role: 'Sale & Marketing',
+      image: 'https://scontent.fhan14-4.fna.fbcdn.net/v/t39.30808-6/457225841_1254136635575136_8293585779637748378_n.jpg?stp=cp6_dst-jpg&_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeFOsKk1bDr_BbJqyvLRNXAvQJr6oRJPOuVAmvqhEk865euXg5_Bjm8uFnApDPhQotE3C1PyuuKMSUJJlugiR-px&_nc_ohc=duDM2SiIk5oQ7kNvgHpLOzU&_nc_zt=23&_nc_ht=scontent.fhan14-4.fna&_nc_gid=AAnW2piDwjc2CtGHHcWPhKa&oh=00_AYCh-GJRGj-P_p13zjrZuqN2UYEDRhjRqWt3nchEnAoP6w&oe=6738EBFE',
+    }
   ];
 
   const values = [
