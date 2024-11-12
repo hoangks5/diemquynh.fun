@@ -22,8 +22,8 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
-            {/* Route mặc định chuyển hướng đến /login */}
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            {/* Route mặc định chuyển hướng đến /home */}
+            <Route path="/" element={<Navigate to="/home" replace />} />
             
             {/* Route login */}
             <Route path="/login" element={<Login />} />

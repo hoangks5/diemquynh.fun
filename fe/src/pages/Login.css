@@ -9,6 +9,7 @@
     overflow: hidden;
     margin: 0;
     padding: 0;
+    padding-top: 60px;
   }
   
   .login-background {
