@@ -7,7 +7,11 @@ import {
   FaCode,
   FaDatabase,
   FaCloud,
-  FaMobile
+  FaMobile,
+  FaCog,
+  FaUserFriends,
+  FaImage,
+  FaHeadset
 } from 'react-icons/fa';
 import './Features.css';
 
@@ -15,46 +19,66 @@ const Features = () => {
   const features = [
     {
       icon: <FaRobot />,
-      title: 'AI Thông Minh',
-      description: 'Tích hợp các thuật toán AI tiên tiến giúp tự động hóa và tối ưu quy trình làm việc'
+      title: 'AI Tạo Nội Dung Thông Minh',
+      description: 'Công nghệ AI tiên tiến tự động tạo bài đăng tuyển dụng đa dạng, tối ưu SEO và từ khóa theo ngành nghề'
     },
     {
       icon: <FaShieldAlt />,
-      title: 'Bảo Mật Tối Ưu',
-      description: 'Hệ thống bảo mật đa lớp với mã hóa end-to-end và xác thực hai yếu tố'
+      title: 'Quản Lý Đa Tài Khoản An Toàn',
+      description: 'Hệ thống bảo mật cao cấp, tự động luân chuyển IP, chống checkpoint và cảnh báo sớm rủi ro cho nhiều tài khoản'
     },
     {
       icon: <FaBolt />,
-      title: 'Hiệu Suất Cao',
-      description: 'Tối ưu hóa hiệu suất với thời gian phản hồi nhanh và xử lý đa luồng'
+      title: 'Auto Đăng Bài Đa Nền Tảng',
+      description: 'Tự động đăng bài theo lịch trình thông minh trên Facebook, LinkedIn, Groups với nội dung được tối ưu cho từng nền tảng'
     },
     {
       icon: <FaChartLine />,
-      title: 'Phân Tích Dữ Liệu',
-      description: 'Công cụ phân tích dữ liệu chuyên sâu với báo cáo chi tiết và trực quan'
+      title: 'Phân Tích & Báo Cáo Chuyên Sâu',
+      description: 'Dashboard thống kê chi tiết về tương tác, chuyển đổi và ROI theo thời gian thực với biểu đồ trực quan'
     }
   ];
 
   const advancedFeatures = [
     {
       icon: <FaCode />,
-      title: 'API Tích Hợp',
-      description: 'API RESTful linh hoạt cho phép tích hợp dễ dàng với các hệ thống khác'
+      title: 'Auto Tương Tác Thông Minh',
+      description: 'Tự động like, comment, inbox với nội dung được cá nhân hóa theo từng đối tượng. Hỗ trợ spin content và tránh spam'
     },
     {
       icon: <FaDatabase />,
-      title: 'Quản Lý Dữ Liệu',
-      description: 'Hệ thống quản lý dữ liệu thông minh với backup tự động và phục hồi nhanh chóng'
+      title: 'CRM Ứng Viên Tích Hợp',
+      description: 'Quản lý toàn diện thông tin ứng viên, lịch sử tương tác, gắn tag tự động và scoring theo tiêu chí tùy chỉnh'
     },
     {
       icon: <FaCloud />,
-      title: 'Cloud Native',
-      description: 'Kiến trúc cloud native đảm bảo khả năng mở rộng và độ tin cậy cao'
+      title: 'Auto Seeding Chuyên Nghiệp',
+      description: 'Hệ thống tài khoản ảo chất lượng cao với lịch sử hoạt động thực, tự động tương tác theo kịch bản và giờ vàng'
     },
     {
       icon: <FaMobile />,
-      title: 'Đa Nền Tảng',
-      description: 'Hỗ trợ đầy đủ trên các thiết bị và nền tảng khác nhau'
+      title: 'Bảo Mật Đa Lớp',
+      description: 'Hệ thống proxy riêng, VPN premium, 2FA và cơ chế phân quyền chi tiết cho team work'
+    },
+    {
+      icon: <FaCog />,
+      title: 'Tùy Biến Kịch Bản',
+      description: 'Xây dựng và lưu trữ các kịch bản marketing tự động với điều kiện và quy tắc linh hoạt theo nhu cầu'
+    },
+    {
+      icon: <FaUserFriends />,
+      title: 'Quản Lý Groups & Fanpage',
+      description: 'Theo dõi và quản lý tập trung các nhóm tuyển dụng, phân loại theo hiệu quả và tự động tham gia nhóm mới'
+    },
+    {
+      icon: <FaImage />,
+      title: 'Thư Viện Media Đa Dạng',
+      description: 'Kho ảnh, video mẫu chuyên nghiệp và công cụ chỉnh sửa nhanh với template theo ngành nghề'
+    },
+    {
+      icon: <FaHeadset />,
+      title: 'Hỗ Trợ 24/7',
+      description: 'Đội ngũ chuyên gia hỗ trợ kỹ thuật và tư vấn chiến lược marketing 24/7 qua chat, call và remote'
     }
   ];
 
