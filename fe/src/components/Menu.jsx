@@ -4,12 +4,14 @@ import { useAuth } from '../contexts/AuthContext';
 import { 
   FaHome, 
   FaUser, 
-  FaHeart, 
-  FaCompass, 
-  FaCog, 
-  FaSignOutAlt,
+  FaUsers, 
+  FaRobot, 
+  FaComments, 
+  FaSeedling,
+  FaBrain,
   FaBars,
-  FaTimes
+  FaTimes,
+  FaSignOutAlt
 } from 'react-icons/fa';
 import './Menu.css';
 
@@ -20,10 +22,12 @@ const Menu = () => {
 
   const menuItems = [
     { icon: <FaHome />, text: 'Trang chủ', path: '/home' },
-    { icon: <FaCompass />, text: 'Khám phá', path: '/explore' },
-    { icon: <FaHeart />, text: 'Yêu thích', path: '/favorites' },
     { icon: <FaUser />, text: 'Tài khoản', path: '/profile' },
-    { icon: <FaCog />, text: 'Cài đặt', path: '/settings' },
+    { icon: <FaUsers />, text: 'Group', path: '/groups' },
+    { icon: <FaRobot />, text: 'Auto Post', path: '/auto-post' },
+    { icon: <FaComments />, text: 'Auto Comment', path: '/auto-comment' },
+    { icon: <FaSeedling />, text: 'Seeding', path: '/seeding' },
+    { icon: <FaBrain />, text: 'AI Content', path: '/ai-content' },
   ];
 
   const handleLogout = async () => {
