@@ -28,7 +28,7 @@
   
   .home-content {
     padding: 2rem;
-    max-width: 1200px;
+    max-width: auto;
     margin: 0 auto;
   }
   
@@ -47,14 +47,22 @@
   .home-layout {
     min-height: 100vh;
     background: linear-gradient(135deg, #1e1e2f, #2d2b42);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
   
   .home-main {
     flex: 1;
     width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: transparent;
   }
   
   .home-content {
@@ -64,6 +72,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: transparent;
+    padding: 2rem;
   }
   
   .welcome-section {
@@ -89,7 +99,7 @@
     padding: 2rem;
   }
   
-  @media (min-width: 768px) {
+  @media (min-width: 680px) {
     .home-main {
       margin-left: 240px;
       padding-bottom: 0;
@@ -99,3 +109,5 @@
       padding: 2rem 3rem;
     }
   }
+
+  

@@ -1,0 +1,261 @@
+.pricing-layout {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1e2f, #2d2b42);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.pricing-main {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  padding: 2rem;
+  padding-top: 6rem;
+}
+
+.pricing-main h1 {
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.pricing-toggle {
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 4px;
+  border-radius: 30px;
+  margin-bottom: 0.5rem;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-btn {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.toggle-btn.active {
+  color: white;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.toggle-btn.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(255, 255, 255, 0.1), 
+    rgba(255, 255, 255, 0.05)
+  );
+  border-radius: 25px;
+  z-index: -1;
+}
+
+.toggle-btn:hover:not(.active) {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.toggle-btn {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.toggle-btn.active {
+  transform: scale(1.05);
+}
+
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.pricing-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--card-color);
+  background: linear-gradient(90deg, transparent, var(--card-color), transparent);
+}
+
+.pricing-card:hover {
+  transform: translateY(-15px) rotateX(5deg);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-icon {
+  color: var(--card-color);
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px var(--card-color));
+}
+
+.popular {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.popular-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: -3rem;
+  background: var(--card-color);
+  color: white;
+  padding: 0.5rem 3.5rem;
+  transform: rotate(45deg);
+  font-size: 0.85rem;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.price {
+  margin: 1.5rem 0;
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.amount {
+  font-size: 2.8rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #fff, var(--card-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.currency {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.period {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.features li {
+  padding: 0.8rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.features li:before {
+  content: "✓";
+  color: var(--card-color);
+  margin-right: 12px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.1);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.subscribe-btn {
+  background: linear-gradient(45deg, var(--card-color), rgba(255,255,255,0.2));
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.subscribe-btn:hover {
+  filter: brightness(120%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.subscribe-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .pricing-card {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .pricing-main {
+    padding: 1rem;
+  }
+} 

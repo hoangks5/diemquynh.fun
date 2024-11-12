@@ -4,7 +4,10 @@ import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import { AuthProvider } from './contexts/AuthContext';
-
+import Pricing from './pages/Pricing';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import Features from './pages/Features';
 function App() {
   return (
     <AuthProvider>
@@ -18,6 +21,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           {/* Route home với layout chính */}
           <Route path="/home" element={<Home />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/features" element={<Features />} />
         </Routes>
       </Router>
     </AuthProvider>

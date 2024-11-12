@@ -60,8 +60,6 @@ const Home = () => {
           )}
         </div>
       </main>
-
-      <Bottom />
     </div>
   );
 };
