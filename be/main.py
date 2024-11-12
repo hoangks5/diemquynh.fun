@@ -21,7 +21,7 @@ app.add_middleware(
 # Cấu hình bảo mật
 SECRET_KEY = "quynhngu"  # Trong thực tế nên lưu trong biến môi trường
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 3
 
 # Mô hình dữ liệu
 class Token(BaseModel):

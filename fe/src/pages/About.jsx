@@ -7,22 +7,22 @@ const About = () => {
     {
       name: 'Nguyễn Văn A',
       role: 'Giám đốc điều hành',
-      image: 'https://via.placeholder.com/150',
+      image: 'https://randomuser.me/api/portraits/men/32.jpg',
     },
     {
       name: 'Trần Thị B',
       role: 'Giám đốc sản phẩm',
-      image: 'https://via.placeholder.com/150',
+      image: 'https://randomuser.me/api/portraits/women/44.jpg',
     },
     {
       name: 'Lê Văn C',
       role: 'Trưởng phòng kỹ thuật',
-      image: 'https://via.placeholder.com/150',
+      image: 'https://randomuser.me/api/portraits/men/55.jpg',
     },
     {
       name: 'Phạm Thị D',
       role: 'Trưởng phòng marketing',
-      image: 'https://via.placeholder.com/150',
+      image: 'https://randomuser.me/api/portraits/women/67.jpg',
     },
   ];
 
@@ -46,6 +46,69 @@ const About = () => {
       icon: <FaHandshake />,
       title: 'Tin cậy',
       description: 'Xây dựng niềm tin với khách hàng và đối tác'
+    }
+  ];
+
+  const feedbacks = [
+    {
+      content: "Giải pháp của công ty đã giúp chúng tôi tăng hiệu suất làm việc lên 200%. Thật sự ấn tượng với chất lượng sản phẩm và dịch vụ hỗ trợ.",
+      author: "Nguyễn Thị Minh",
+      company: "CEO, Tech Solutions",
+      avatar: "https://randomuser.me/api/portraits/women/1.jpg"
+    },
+    {
+      content: "Đội ngũ kỹ thuật chuyên nghiệp và tận tâm. Họ không chỉ cung cấp giải pháp mà còn đồng hành cùng chúng tôi trong suốt quá trình triển khai.",
+      author: "Trần Văn Hùng",
+      company: "CTO, Innovation Corp",
+      avatar: "https://randomuser.me/api/portraits/men/2.jpg"
+    },
+    {
+      content: "Sản phẩm có giao diện người dùng tuyệt vời, dễ sử dụng và đáp ứng đầy đủ nhu cầu của doanh nghiệp chúng tôi.",
+      author: "Lê Thị Hoa",
+      company: "Giám đốc Marketing, Digital World",
+      avatar: "https://randomuser.me/api/portraits/women/3.jpg"
+    },
+    {
+      content: "Tôi đặc biệt ấn tượng với khả năng tùy biến sản phẩm theo yêu cầu riêng. Đội ngũ phát triển rất linh hoạt và sáng tạo.",
+      author: "Phạm Minh Đức",
+      company: "Founder, StartUp Hub",
+      avatar: "https://randomuser.me/api/portraits/men/4.jpg"
+    },
+    {
+      content: "Hệ thống hoạt động ổn định và bảo mật cao. Chúng tôi hoàn toàn yên tâm khi sử dụng dịch vụ của công ty.",
+      author: "Hoàng Thị Lan",
+      company: "CISO, Security First",
+      avatar: "https://randomuser.me/api/portraits/women/5.jpg"
+    },
+    {
+      content: "Dịch vụ khách hàng xuất sắc, phản hồi nhanh chóng và luôn sẵn sàng hỗ trợ 24/7.",
+      author: "Vũ Anh Tuấn",
+      company: "COO, Global Services",
+      avatar: "https://randomuser.me/api/portraits/men/6.jpg"
+    },
+    {
+      content: "Giải pháp của công ty đã giúp chúng tôi tiết kiệm đáng kể chi phí vận hành và tối ưu hóa quy trình làm việc.",
+      author: "Đặng Thu Thảo",
+      company: "CFO, Finance Plus",
+      avatar: "https://randomuser.me/api/portraits/women/7.jpg"
+    },
+    {
+      content: "Sản phẩm có khả năng mở rộng tuyệt vời, dễ dàng phát triển theo quy mô doanh nghiệp.",
+      author: "Ngô Văn Nam",
+      company: "CTO, Scale Up",
+      avatar: "https://randomuser.me/api/portraits/men/8.jpg"
+    },
+    {
+      content: "Đội ngũ phát triển luôn cập nhật những công nghệ mới nhất, tạo ra sản phẩm hiện đại và cạnh tranh.",
+      author: "Trịnh Công Sơn",
+      company: "Tech Lead, Future Tech",
+      avatar: "https://randomuser.me/api/portraits/men/9.jpg"
+    },
+    {
+      content: "Chúng tôi đã thử nhiều giải pháp khác nhau, nhưng sản phẩm của công ty là lựa chọn tốt nhất về cả chất lượng và giá cả.",
+      author: "Mai Thanh Hà",
+      company: "Giám đốc điều hành, Best Choice",
+      avatar: "https://randomuser.me/api/portraits/women/10.jpg"
     }
   ];
 
@@ -85,6 +148,24 @@ const About = () => {
                 </div>
                 <h3>{member.name}</h3>
                 <p>{member.role}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="feedback-section">
+          <h2>Khách Hàng Nói Gì Về Chúng Tôi</h2>
+          <div className="feedback-grid">
+            {feedbacks.map((feedback, index) => (
+              <div key={index} className="feedback-card">
+                <div className="feedback-avatar">
+                  <img src={feedback.avatar} alt={feedback.author} />
+                </div>
+                <p className="feedback-content">{feedback.content}</p>
+                <div className="feedback-info">
+                  <p className="feedback-author">{feedback.author}</p>
+                  <p className="feedback-company">{feedback.company}</p>
+                </div>
               </div>
             ))}
           </div>

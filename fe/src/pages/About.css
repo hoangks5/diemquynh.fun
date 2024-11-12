@@ -272,7 +272,106 @@
   line-height: 1.6;
 }
 
-/* Responsive Design */
+/* Feedback Section */
+.feedback-section {
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.feedback-section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  background: linear-gradient(45deg, #fff, #9C27B0, #ff4081, #fff);
+  background-size: 300% 300%;
+  animation: textGradient 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+}
+
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feedback-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(156, 39, 176, 0.05));
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 2px solid #ff4081;
+  overflow: hidden;
+  align-self: center;
+}
+
+.feedback-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feedback-content {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.feedback-content::before {
+  content: '"';
+  font-size: 3rem;
+  color: #ff4081;
+  position: absolute;
+  left: -10px;
+  top: -20px;
+  opacity: 0.3;
+}
+
+.feedback-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+}
+
+.feedback-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(156, 39, 176, 0.2);
+}
+
+.feedback-content {
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.feedback-author {
+  color: #ff4081;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.feedback-company {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
 @media (max-width: 768px) {
   .hero-section {
     padding: 3rem 1rem;
@@ -296,6 +395,11 @@
 
   .mission-section {
     padding: 3rem 1rem;
+  }
+
+  .feedback-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
   }
 }
 
