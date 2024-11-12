@@ -48,19 +48,32 @@ const Group = () => {
     try {
       const activeToken = await getRandomToken();
 
-      // Kiểm tra group ID hợp lệ bằng cách gọi Facebook API
-      const response = await fetch(`https://graph.facebook.com/${newGroupId}?fields=name,member_count&access_token=${activeToken}`);
+      // Sử dụng endpoint groups thay vì truy cập trực tiếp
+      const response = await fetch(`https://graph.facebook.com/v19.0/${newGroupId}?fields=name,member_count,privacy,administrator&access_token=${activeToken}`);
       const data = await response.json();
       
       if (data.error) {
+        if (data.error.code === 100) {
+          throw new Error('Không thể truy cập nhóm này. Có thể do ID không đúng hoặc bạn không phải là thành viên của nhóm.');
+        }
+        if (data.error.code === 3) {
+          throw new Error('Token không có đủ quyền. Vui lòng cấp quyền: groups_access_member_info, groups_show_list');
+        }
         throw new Error('Group ID không hợp lệ');
+      }
+
+      // Kiểm tra xem có phải là nhóm công khai không
+      if (data.privacy !== 'OPEN') {
+        throw new Error('Chỉ có thể thêm nhóm công khai');
       }
 
       const newGroup = {
         id: Date.now(),
         groupId: newGroupId,
         name: data.name,
-        memberCount: data.member_count,
+        memberCount: data.member_count || 0,
+        privacy: data.privacy,
+        isAdmin: data.administrator || false,
         addedAt: new Date().toISOString()
       };
 
