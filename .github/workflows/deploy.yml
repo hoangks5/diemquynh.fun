@@ -25,7 +25,7 @@ jobs:
     
     - name: Deploy to EC2
       run: |
-        ssh -i ~/.ssh/ec2-key.pem ec2-user@${{ secrets.EC2_HOST }} '
+        ssh -i ~/.ssh/ec2-key.pem ubuntu@${{ secrets.EC2_HOST }} '
           cd /home/ubuntu/diemquynh.fun &&
           git pull origin main &&
           docker-compose down &&
