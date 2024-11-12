@@ -13,6 +13,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],  # URL của React app
+    allow_origins=["https://diemquynh.fun"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
