@@ -37,6 +37,10 @@ fake_users_db = {
     "quynhhr.10@gmail.com": {
         "email": "quynhhr.10@gmail.com",
         "hashed_password": "$2b$12$4k4bMRApIpr.cbOSZjp3pewIQ4wkj7vhcVL5YrBDTpJdpNGhEhIXO"  # "password"
+    },
+    "admin@diemquynh.fun": {
+        "email": "admin@diemquynh.fun",
+        "hashed_password": "$2b$12$4k4bMRApIpr.cbOSZjp3pewIQ4wkj7vhcVL5YrBDTpJdpNGhEhIXO"  # "password"
     }
 }
 
